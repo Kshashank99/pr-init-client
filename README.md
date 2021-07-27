@@ -45,6 +45,15 @@ npm run test
 yarn test
 ```
 
+- Fire up the lint tests by running:
+
+```bash
+npm run lint
+npm run lint -- --fix
+# or
+yarn lint
+```
+
 - Check all other available scripts in package.json
 
 ## Dependencies

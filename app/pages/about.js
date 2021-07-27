@@ -7,7 +7,7 @@ export default function About() {
   return (
     <Container title="About | Project Init">
       <ContentWrapper>
-        <Heading as="h2" variant="h2" textAlign="center">
+        <Heading as="h2" textAlign="center" variant="h2">
           About Us
         </Heading>
       </ContentWrapper>

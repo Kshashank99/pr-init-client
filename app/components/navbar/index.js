@@ -10,44 +10,41 @@ import { useColorMode } from "@chakra-ui/color-mode";
 import { StyledLink } from "../styled-link/styled-link";
 import { CodeIcon } from "../icons/code-icon";
 
-const Navbar = ({ isOpen, toggleIsOpen }) => {
+function Navbar({ isOpen, toggleIsOpen }) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { colorDark } = useColorModeSwitcher();
   return (
     <Flex
-      mb={isOpen ? { base: "1rem" } : { base: "4.5rem", lg: "3rem" }}
       as="nav"
-      p="4"
       justify="space-between"
+      mb={isOpen ? { base: "1rem" } : { base: "4.5rem", lg: "3rem" }}
+      p="4"
     >
       <MenuButton toggleIsOpen={toggleIsOpen} />
       <CodeIcon fill={colorDark} />
       <HStack spacing={{ base: 0, md: 8 }}>
-        <Flex align="center" display={{ base: "none", lg: "flex" }} as="ul">
-          <Item variant="noStyle" href="/">
+        <Flex align="center" as="ul" display={{ base: "none", lg: "flex" }}>
+          {/* <Item href="/" variant="noStyle">
             Home
+          </Item> */}
+          <Item href="/projects" variant="noStyle">
+            Discover
           </Item>
-          <Item variant="noStyle" href="/blog">
-            Blog
+          <Item href="/blog" variant="noStyle">
+            Product
           </Item>
-          <Item variant="noStyle" href="/about">
-            About
+          <Item href="/about" variant="noStyle">
+            Resources
           </Item>
-          <Item variant="noStyle" href="/projects">
-            Projects
-          </Item>
-          <Item isExternal variant="noStyle" href="/Vincent-Arlou-Res_L.pdf">
-            CV
+          <Item href="/login" variant="noStyle">
+            Log In
           </Item>
         </Flex>
         <IconButton
-          id="toggleTheme"
-          borderRadius="sm"
-          variant="icon"
-          onClick={toggleColorMode}
           aria-label={
             colorMode === "light" ? "Toggle dark mode" : "Toggle light Mode"
           }
+          borderRadius="sm"
           icon={
             colorMode === "light" ? (
               <IoMoon size="1.25rem" />
@@ -55,45 +52,48 @@ const Navbar = ({ isOpen, toggleIsOpen }) => {
               <IoSunnyOutline size="1.25rem" />
             )
           }
+          id="toggleTheme"
+          onClick={toggleColorMode}
+          variant="icon"
         />
       </HStack>
     </Flex>
   );
-};
+}
 
-export const MobileNavMenu = () => {
+export function MobileNavMenu() {
   return (
     <VStack spacing={4} w="100%">
-      <VStack p={4} w="100%" my={8} spacing={8} as="ul">
-        <Item spacing={4} variant="large" href="/">
+      <VStack as="ul" my={8} p={4} spacing={8} w="100%">
+        <Item href="/" spacing={4} variant="large">
           Home
         </Item>
-        <Item spacing={4} variant="large" href="/about">
+        <Item href="/about" spacing={4} variant="large">
           About
         </Item>
-        <Item spacing={4} variant="large" href="/projects">
+        <Item href="/projects" spacing={4} variant="large">
           Projects
         </Item>
-        <Item spacing={4} variant="large" href="/blog">
+        <Item href="/blog" spacing={4} variant="large">
           Blog
         </Item>
       </VStack>
-      <VStack p={4} w="100%" my={8} spacing={8} as="ul">
-        <Item variant="large" href="/newsletter">
+      <VStack as="ul" my={8} p={4} spacing={8} w="100%">
+        <Item href="/newsletter" variant="large">
           Newsletter
         </Item>
-        <Item variant="large" href="/community">
+        <Item href="/community" variant="large">
           Community
         </Item>
-        <Item variant="large" href="/uses">
+        <Item href="/uses" variant="large">
           Uses
         </Item>
       </VStack>
     </VStack>
   );
-};
+}
 
-const MenuButton = ({ toggleIsOpen, ...props }) => {
+function MenuButton({ toggleIsOpen, ...props }) {
   const [clicked, toggleClicked] = useToggle();
 
   const handleClick = () => {
@@ -102,78 +102,78 @@ const MenuButton = ({ toggleIsOpen, ...props }) => {
   };
   return (
     <IconButton
-      borderRadius="sm"
-      onClick={handleClick}
-      display={{ base: "block", lg: "none" }}
-      w="48px"
-      h="48px"
-      variant="ghost"
       _hover={{ variant: "ghost" }}
+      borderRadius="sm"
+      display={{ base: "block", lg: "none" }}
+      h="48px"
+      onClick={handleClick}
+      variant="ghost"
+      w="48px"
       {...props}
       icon={<MenuIcon clicked={clicked} />}
     />
   );
-};
+}
 
-const MenuIcon = ({ clicked }) => {
+function MenuIcon({ clicked }) {
   const { colorDark } = useColorModeSwitcher();
   return (
     <Box
-      w="100%"
       h="100%"
       position="relative"
+      w="100%"
       // transform={"rotate(0deg)"}
       // transition={"all 0.5s ease-in-out"}
     >
       <Line
         bg={colorDark}
-        transform={clicked ? "rotate(45deg)" : "none"}
-        width={clicked ? "32px" : "40px"}
         left={clicked ? "8px" : "4px"}
         top={clicked ? "22px" : "16px"}
+        transform={clicked ? "rotate(45deg)" : "none"}
+        width={clicked ? "32px" : "40px"}
       />
       <Line
         bg={colorDark}
+        bottom={clicked ? "22px" : "16px"}
+        left={clicked ? "8px" : "4px"}
         transform={clicked ? "rotate(-45deg)" : "none"}
         width={clicked ? "32px" : "40px"}
-        left={clicked ? "8px" : "4px"}
-        bottom={clicked ? "22px" : "16px"}
       />
     </Box>
   );
-};
+}
 
-const Line = ({ ...props }) => {
+function Line({ ...props }) {
   return (
     <Box
       {...props}
       as="span"
       borderRadius="13px"
-      position="absolute"
       height="2px"
+      position="absolute"
       transition="all 0.3s ease-in-out"
     />
   );
-};
+}
 
-const Item = ({ children, href, ...props }) => {
+function Item({ children, href, ...props }) {
   const { colorGrey } = useColorModeSwitcher();
   //const [isLarge] = useMediaQuery('(min-width: 992px)');
   return (
     <VStack
       align="start"
-      pb={{ base: 4, lg: 0 }}
-      w="100%"
       as="li"
-      listStyleType="none"
       borderBottom={{ base: "1px solid", lg: "none" }}
       borderColor={colorGrey}
+      listStyleType="none"
+      pb={{ base: 4, lg: 0 }}
+      w="100%"
     >
       <StyledLink {...props} href={href}>
         {children}
       </StyledLink>
     </VStack>
   );
-};
+}
 
 export { Navbar };

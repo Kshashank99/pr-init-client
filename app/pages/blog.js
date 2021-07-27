@@ -7,7 +7,7 @@ export default function Blog({ posts }) {
   return (
     <Container title="Blog | Project Init">
       <ContentWrapper>
-        <Heading as="h2" variant="h2" textAlign="center">
+        <Heading as="h2" textAlign="center" variant="h2">
           Blog
         </Heading>
       </ContentWrapper>

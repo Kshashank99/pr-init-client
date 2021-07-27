@@ -10,15 +10,15 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 
-const Page404 = () => {
+function Page404() {
   const { colorMode } = useColorMode();
 
   return (
     <>
-      <Box width={["100%", "70%", "60%", "60%"]} margin="0 auto">
+      <Box margin="0 auto" width={["100%", "70%", "60%", "60%"]}>
         <Image src="/404 Error-pana.svg" />
       </Box>
-      <Text textAlign="center" fontSize="xs">
+      <Text fontSize="xs" textAlign="center">
         <ChakraLink href="https://stories.freepik.com/web" isExternal>
           Illustration by Freepik Stories
         </ChakraLink>
@@ -27,7 +27,7 @@ const Page404 = () => {
       <Box marginY={4}>
         <Heading textAlign="center">Page not Found.</Heading>
 
-        <Box textAlign="center" marginTop={4}>
+        <Box marginTop={4} textAlign="center">
           <Text>It's Okay!</Text>
           <Link href="/" passHref>
             <Button
@@ -40,6 +40,6 @@ const Page404 = () => {
       </Box>
     </>
   );
-};
+}
 
 export default Page404;

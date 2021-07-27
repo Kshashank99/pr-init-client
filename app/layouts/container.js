@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import React from "react";
 import Head from "next/head";
 import { useToggle } from "../hooks/useToggle";
@@ -5,35 +6,35 @@ import { Button } from "@chakra-ui/button";
 import { Box, VStack } from "@chakra-ui/react";
 // import { MobileNavMenu, Navbar } from "../components/navbar";
 import { MobileNavMenu, Navbar } from "../components/navbar";
-import { Footer } from "../components/footer/footer";
+import { FooterSection } from "../components/sections/footer-section/index";
 
-const Container = ({
+function Container({
   // customSpacing = { base: '8rem', lg: '10rem' },
   footerColor,
   children,
   ...customMeta
-}) => {
+}) {
   const [isOpen, toggleIsOpen] = useToggle();
 
   return (
     <Box>
       <Seo {...customMeta} />
       <Box
-        w={{ base: "100vw", "2xl": "80vw", "3xl": "72vw" }}
-        minH="100vh"
         m="auto"
+        minH="100vh"
+        w={{ base: "100vw", "2xl": "80vw", "3xl": "72vw" }}
       >
         <Navbar isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
-        <VStack id="skip" as="main" spacing={{ base: "2rem", lg: "6rem" }}>
+        <VStack as="main" id="skip" spacing={{ base: "2rem", lg: "6rem" }}>
           {isOpen ? <MobileNavMenu /> : children}
-          <Footer customBgColor={footerColor} />
+          <FooterSection customBgColor={footerColor} />
         </VStack>
       </Box>
     </Box>
   );
-};
+}
 
-const Seo = ({ ...customMeta }) => {
+function Seo({ ...customMeta }) {
   const meta = {
     title: "Project Init",
     description:
@@ -47,25 +48,25 @@ const Seo = ({ ...customMeta }) => {
     <Head>
       <title>{meta.title}</title>
       <meta content={meta.description} name="description" />
-      <link rel="icon" href="/favicon.ico" />
+      <link href="/favicon.ico" rel="icon" />
     </Head>
   );
-};
+}
 
-const SkipButton = () => {
+function SkipButton() {
   return (
     <Button
-      variant="secondary"
+      _focus={{ transform: "translateX(0%)" }}
       as="a"
       href="#skip"
       position="absolute"
       transform="translateX(-100%)"
       transition="transform 0.3s"
-      _focus={{ transform: "translateX(0%)" }}
+      variant="secondary"
     >
       Skip to Content
     </Button>
   );
-};
+}
 
 export { Container };

@@ -1,11 +1,11 @@
 import React from "react";
 import { render } from "@testing-library/react";
 
-import { Footer } from "./footer";
+import { FooterSection } from "./index";
 
-describe("Footer", () => {
+describe("FooterSection", () => {
   it("should render successfully", () => {
-    const { baseElement } = render(<Footer />);
+    const { baseElement } = render(<FooterSection />);
     expect(baseElement).toBeTruthy();
   });
 });

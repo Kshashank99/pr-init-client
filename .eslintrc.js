@@ -3,7 +3,6 @@
 module.exports = {
   extends: [
     "next",
-    "next/core-web-vitals",
     "eslint:recommended",
     "plugin:react/all",
     "plugin:import/errors",
@@ -57,5 +56,5 @@ module.exports = {
       jsx: true,
     },
   },
-  ignorePatterns: ["node_modules/", ".next/"],
+  ignorePatterns: ["node_modules/", ".next/", "./package-lock.json"],
 };
