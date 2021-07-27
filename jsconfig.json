@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    // "module": "commonjs",
+    // "target": "es6",
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["app/components/*"],
+      "@sections/*": ["app/components/sections/*"],
+      "@icons/*": ["app/components/icons/*"],
+      "@content/*": ["app/content/*"],
+      "@layouts/*": ["app/layouts/*"],
+      "@styles/*": ["app/styles/*"],
+      "@utils/*": ["app/utils/*"],
+      "@hooks/*": ["app/hooks/*"],
+      "@context/*": ["app/context/*"],
+      "@lib/*": ["app/lib/*"]
+    }
+  },
+  "exclude": ["node_modules", ".next"]
+}
