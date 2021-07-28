@@ -1,7 +1,9 @@
 /* eslint-disable react/no-multi-comp */
 /**
  * TODO: Make routes file in content(data folder) and import them instead,
- * so it will be easier to manage them across the app.
+ * so it will be easier to manage them across the app. You can even map the
+ * results in case of a file like this. Make a single route layout comp.
+ * I reapeat logic here, thus I didn't split them into separate files.
  */
 import React from "react";
 import { NavLink } from "../styled-link/nav-link";

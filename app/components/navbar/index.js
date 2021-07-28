@@ -1,14 +1,24 @@
+/* eslint-disable react/no-multi-comp */
+/**
+ * TODO:
+ *  1) Refactor into smaller components
+ *  2) Authentication Display Logic
+ *  3) Fix routes
+ */
 import React from "react";
 import { Box, Flex, HStack, VStack, Link } from "@chakra-ui/layout";
 import { MoonIcon as IoMoon } from "../icons/moon-icon";
 import { SunIcon as IoSunnyOutline } from "../icons/sun-icon";
-// import { MenuIcon } from "../icons/menu-icon";
 import { IconButton } from "@chakra-ui/button";
 import { useToggle } from "../../hooks/useToggle";
 import { useColorModeSwitcher } from "../../hooks/useColorModeSwitcher";
 import { useColorMode } from "@chakra-ui/color-mode";
+import { VerticalLink } from "../styled-link/vertical-link";
 import { StyledLink } from "../styled-link/styled-link";
 import { CodeIcon } from "../icons/code-icon";
+
+// test hover menu
+import { HoverDropDown } from "../hover-dropdown";
 
 function Navbar({ isOpen, toggleIsOpen }) {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -24,21 +34,46 @@ function Navbar({ isOpen, toggleIsOpen }) {
       <CodeIcon fill={colorDark} />
       <HStack spacing={{ base: 0, md: 8 }}>
         <Flex align="center" as="ul" display={{ base: "none", lg: "flex" }}>
-          {/* <Item href="/" variant="noStyle">
-            Home
-          </Item> */}
-          <Item href="/projects" variant="noStyle">
-            Discover
-          </Item>
-          <Item href="/blog" variant="noStyle">
-            Product
-          </Item>
-          <Item href="/about" variant="noStyle">
-            Resources
-          </Item>
-          <Item href="/login" variant="noStyle">
+          {/* Discover Our Product Routes */}
+          <HoverDropDown href="/" title="Discover" variant="noStyle">
+            <VerticalLink href="/projects" variant="noStyle">
+              Projects
+            </VerticalLink>
+            <VerticalLink href="/teams" variant="noStyle">
+              Teams
+            </VerticalLink>
+            <VerticalLink href="/about" variant="noStyle">
+              About
+            </VerticalLink>
+            <VerticalLink href="/careers" variant="noStyle">
+              Careers
+            </VerticalLink>
+          </HoverDropDown>
+          {/* Resources Routes */}
+          <HoverDropDown href="/resources" title="Resources" variant="noStyle">
+            <VerticalLink href="init/guides" variant="noStyle">
+              Guides
+            </VerticalLink>
+            <VerticalLink href="init/community" variant="noStyle">
+              Community
+            </VerticalLink>
+            <VerticalLink href="init/newsletter" variant="noStyle">
+              Newsletter
+            </VerticalLink>
+            <VerticalLink href="init/uses" variant="noStyle">
+              Uses
+            </VerticalLink>
+            <VerticalLink href="/contact" variant="noStyle">
+              Contact Us
+            </VerticalLink>
+            <VerticalLink href="init/support" variant="noStyle">
+              Support
+            </VerticalLink>
+          </HoverDropDown>
+          {/* Display Log In / Log Out based on authentication */}
+          <StyledLink href="/login" type="auth" variant="noStyle" w="100%">
             Log In
-          </Item>
+          </StyledLink>
         </Flex>
         <IconButton
           aria-label={
@@ -65,29 +100,29 @@ export function MobileNavMenu() {
   return (
     <VStack spacing={4} w="100%">
       <VStack as="ul" my={8} p={4} spacing={8} w="100%">
-        <Item href="/" spacing={4} variant="large">
+        <VerticalLink href="/" spacing={4} variant="large">
           Home
-        </Item>
-        <Item href="/about" spacing={4} variant="large">
+        </VerticalLink>
+        <VerticalLink href="/about" spacing={4} variant="large">
           About
-        </Item>
-        <Item href="/projects" spacing={4} variant="large">
+        </VerticalLink>
+        <VerticalLink href="/projects" spacing={4} variant="large">
           Projects
-        </Item>
-        <Item href="/blog" spacing={4} variant="large">
+        </VerticalLink>
+        <VerticalLink href="/blog" spacing={4} variant="large">
           Blog
-        </Item>
+        </VerticalLink>
       </VStack>
       <VStack as="ul" my={8} p={4} spacing={8} w="100%">
-        <Item href="/newsletter" variant="large">
+        <VerticalLink href="/newsletter" variant="large">
           Newsletter
-        </Item>
-        <Item href="/community" variant="large">
+        </VerticalLink>
+        <VerticalLink href="/community" variant="large">
           Community
-        </Item>
-        <Item href="/uses" variant="large">
+        </VerticalLink>
+        <VerticalLink href="/uses" variant="large">
           Uses
-        </Item>
+        </VerticalLink>
       </VStack>
     </VStack>
   );
@@ -106,6 +141,7 @@ function MenuButton({ toggleIsOpen, ...props }) {
       borderRadius="sm"
       display={{ base: "block", lg: "none" }}
       h="48px"
+      // eslint-disable-next-line react/jsx-no-bind
       onClick={handleClick}
       variant="ghost"
       w="48px"
@@ -153,26 +189,6 @@ function Line({ ...props }) {
       position="absolute"
       transition="all 0.3s ease-in-out"
     />
-  );
-}
-
-function Item({ children, href, ...props }) {
-  const { colorGrey } = useColorModeSwitcher();
-  //const [isLarge] = useMediaQuery('(min-width: 992px)');
-  return (
-    <VStack
-      align="start"
-      as="li"
-      borderBottom={{ base: "1px solid", lg: "none" }}
-      borderColor={colorGrey}
-      listStyleType="none"
-      pb={{ base: 4, lg: 0 }}
-      w="100%"
-    >
-      <StyledLink {...props} href={href}>
-        {children}
-      </StyledLink>
-    </VStack>
   );
 }
 

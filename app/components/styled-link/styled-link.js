@@ -6,13 +6,27 @@ import NextLink from "next/link";
 import { Box, Link } from "@chakra-ui/layout";
 import { useColorModeSwitcher } from "../../hooks/useColorModeSwitcher";
 
-export function StyledLink({ children, href, ...props }) {
-  const { themed } = useColorModeSwitcher();
+export function StyledLink({ children, href, type, ...props }) {
+  const { themed, secondaryThemed, authThemed } = useColorModeSwitcher();
+
+  function colorSwitch(type) {
+    switch (type) {
+      case "secondary":
+        return { color: secondaryThemed, spanColor: "inherit" };
+      case "auth":
+        return { color: authThemed, spanColor: authThemed };
+      // else return primary default themed color
+      default:
+        return { color: themed, spanColor: themed };
+    }
+  }
+  const { color, spanColor } = colorSwitch(type);
+  // const spanColor = type === "secondary" ? "inherit" : themed;
   return (
     <NextLink href={href} passHref>
       <Link
-        aria-labelledby={children}
         {...props}
+        aria-labelledby={children}
         mr="1rem"
         position="relative"
         sx={{
@@ -26,7 +40,7 @@ export function StyledLink({ children, href, ...props }) {
             position: "absolute",
             width: "100%",
             height: "1px",
-            bg: themed,
+            bg: color,
             top: "100%",
             left: 0,
             pointerEvents: "none",
@@ -35,7 +49,7 @@ export function StyledLink({ children, href, ...props }) {
             position: "absolute",
             width: "100%",
             height: "1px",
-            bg: themed,
+            bg: color,
             top: "100%",
             left: 0,
             pointerEvents: "none",
@@ -45,10 +59,10 @@ export function StyledLink({ children, href, ...props }) {
               transform: "translate3d(0, 2px, 0) scale3d(1.08, 3, 1)",
               clipPath:
                 "polygon(0% 0%, 0% 100%, 50% 100%, 50% 0, 50% 0, 50% 100%, 50% 100%, 0 100%, 100% 100%, 100% 0%)",
-              bg: themed,
+              bg: color,
             },
             span: {
-              color: themed,
+              color: spanColor,
               transform: "translate3d(0, -2px, 0)",
             },
           },

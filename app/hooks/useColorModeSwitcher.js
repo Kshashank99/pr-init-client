@@ -15,6 +15,8 @@ function useColorModeSwitcher() {
 
   // const themed = useColorModeValue('primary.500', 'secondary.300');
   const themed = useColorModeValue("roseRed.900", "turqouise.900");
+  const secondaryThemed = useColorModeValue("roseRed.700", "turqouise.700");
+  const authThemed = useColorModeValue("primary.500", "primary.200");
 
   const colorGrey = useColorModeValue("neutral.200", "neutral.600");
 
@@ -32,6 +34,8 @@ function useColorModeSwitcher() {
     colorDark,
     colorGrey,
     themed,
+    secondaryThemed,
+    authThemed,
     successColor,
     errorColor,
     threeAnimColor,
